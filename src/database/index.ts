@@ -20,13 +20,13 @@ import Shops from "./models/Shops.js";
 dotenv.config();
 
 export const sequelize = new Sequelize({
-  database: "qdsntehy",
+  database: process.env.DB_NAME,
   dialect: "postgres",
-  username: "qdsntehy",
-  password: "MU_zJ8ghpdR6AUWcI9aTpH6PHww7SfRj",
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   storage: ":memory:",
-  host: "dumbo.db.elephantsql.com",
-  port: 5432,
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT as string),
   models: [
     Categories,
     Brands,

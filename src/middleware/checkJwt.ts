@@ -5,7 +5,7 @@ dotenv.config();
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
   const token = <string>req.headers.authorization?.split(" ")[1];
-  const secretKey = "slkdfn25223lkkj523nsdvmnxqabm3478asdad21da";
+  const secretKey = process.env.SECRET_KEY as string;
 
   const jwtPayload = <any>jwt.verify(token, secretKey);
 

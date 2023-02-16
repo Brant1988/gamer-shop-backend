@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import fs from "fs";
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
@@ -21,6 +22,10 @@ app.use(errorMiddleware);
 
 const start = async () => {
   try {
+    const dir = "./static";
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
     await sequelize.authenticate();
     await sequelize.sync();
     app.listen(parseInt(PORT as string) || 3001, () =>
