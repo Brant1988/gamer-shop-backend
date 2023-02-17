@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import router from "./routes/index.js";
 import { errorMiddleware } from "./middleware/errorHandler.js";
 import { sequelize } from "./database/index.js";
+import fs from "fs";
 
 const PORT = process.env.PORT;
 
@@ -21,6 +22,11 @@ app.use(errorMiddleware);
 
 const start = async () => {
   try {
+    const dir = "/static";
+    if (!fs.existsSync(process.cwd() + dir)) {
+      fs.mkdirSync(process.cwd() + dir);
+    }
+
     await sequelize.authenticate();
     await sequelize.sync();
     app.listen(parseInt(PORT as string) || 3001, () =>
