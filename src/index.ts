@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
-app.use(express.static(path.join(process.cwd(), "static")));
+app.use(express.static(path.join(process.cwd(), "build", "static")));
 app.use(errorMiddleware);
 
 const start = async () => {
