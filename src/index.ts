@@ -22,8 +22,8 @@ app.use(errorMiddleware);
 
 const start = async () => {
   try {
-    if (!fs.existsSync(path.join(process.cwd(), "static"))) {
-      fs.mkdirSync(path.join(process.cwd(), "static"));
+    if (!fs.existsSync(path.join(process.cwd(), "build", "static"))) {
+      fs.mkdirSync(path.join(process.cwd(), "build", "static"));
     }
 
     await sequelize.authenticate();
