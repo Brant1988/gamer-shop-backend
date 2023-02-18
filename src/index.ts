@@ -10,6 +10,9 @@ import { sequelize } from "./database/index.js";
 import fs from "fs";
 
 const PORT = process.env.PORT;
+if (!fs.existsSync(path.join(process.cwd(), "build", "static"))) {
+  fs.mkdirSync(path.join(process.cwd(), "build", "static"));
+}
 
 const app = express();
 app.use(cors());
@@ -22,10 +25,6 @@ app.use(errorMiddleware);
 
 const start = async () => {
   try {
-    if (!fs.existsSync(path.join(process.cwd(), "build", "static"))) {
-      fs.mkdirSync(path.join(process.cwd(), "build", "static"));
-    }
-
     await sequelize.authenticate();
     await sequelize.sync();
     app.listen(parseInt(PORT as string) || 3001, () =>
